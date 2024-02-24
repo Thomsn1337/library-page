@@ -22,19 +22,11 @@ function removeBookfromLibrary(book) {
     displayBooks()
 }
 
-const test = new Book("A Game of Thrones", "George R. R. Martin", 694, false)
-const test2 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true)
-const test3 = new Book("The Last Wish", "Andrzej Sapkowski", 288, false)
-const test4 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true)
-const test5 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true)
-const test6 = new Book("The Last Wish", "Andrzej Sapkowski", 288, false)
+const book1 = new Book("A Game of Thrones", "George R. R. Martin", 694, false)
+const book2 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true)
 
-addBookToLibrary(test)
-addBookToLibrary(test2)
-addBookToLibrary(test3)
-addBookToLibrary(test4)
-addBookToLibrary(test5)
-addBookToLibrary(test6)
+addBookToLibrary(book1)
+addBookToLibrary(book2)
 
 function createCard(book) {
     const card = document.createElement("div");
@@ -73,6 +65,10 @@ function createCard(book) {
 
     const statusButton = document.createElement("button")
     statusButton.innerText = "Toggle read status"
+    statusButton.addEventListener("click", () => {
+        book.readStatus = !book.readStatus
+        displayBooks()
+    })
     buttons.appendChild(statusButton)
 
     card.appendChild(buttons)

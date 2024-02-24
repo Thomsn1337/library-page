@@ -69,5 +69,5 @@ main {
 
 .card button:hover {
     background-color: var(--color-blue);
-    color: var(--color-text);
+    color: var(--color-crust);
 }
