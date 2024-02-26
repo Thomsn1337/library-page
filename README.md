@@ -4,6 +4,7 @@ The aim of this project is to learn and apply the basics of JavaScript objects b
 
 ## Links
 
+- [Preview](https://thomsn1337.github.io/library-page/)
 - [About Odin](https://www.theodinproject.com/about)
 - [Assignment page](https://www.theodinproject.com/lessons/node-path-javascript-library)
 
