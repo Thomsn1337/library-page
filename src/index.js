@@ -2,6 +2,12 @@ const cards = document.querySelector(".cards")
 const newBookButton = document.querySelector("#new-button")
 const newBookDialog = document.querySelector("#new-dialog")
 const closeDialogButton = document.querySelector("#close-dialog")
+const newBookForm = document.querySelector("#new-book-form")
+
+const inputTitle = document.querySelector("#title")
+const inputAuthor = document.querySelector("#author")
+const inputPages = document.querySelector("#pages")
+const inputReadStatus = document.querySelector("#read")
 
 const myLibrary = [];
 
@@ -80,11 +86,6 @@ function createCard(book) {
 }
 
 function openDialog() {
-    const inputTitle = document.querySelector("#title")
-    const inputAuthor = document.querySelector("#author")
-    const inputPages = document.querySelector("#pages")
-    const inputReadStatus = document.querySelector("#read")
-
     inputTitle.value = ""
     inputAuthor.value = ""
     inputPages.value = ""
@@ -104,4 +105,9 @@ function displayBooks() {
     myLibrary.forEach(book => createCard(book))
 }
 
-displayBooks()
+newBookForm.addEventListener("submit", () => {
+    addBookToLibrary(new Book(inputTitle.value, inputAuthor.value, inputPages.value, inputReadStatus.checked))
+    displayBooks()
+})
+
+window.addEventListener("load", displayBooks)
