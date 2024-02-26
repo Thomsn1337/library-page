@@ -23,10 +23,45 @@ body {
     color: var(--color-text);
 }
 
-main {
+header {
+    height: 70px;
+    background-color: var(--color-crust);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px 0 30px;
+}
+
+header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    box-sizing: border-box;
+    background: none;
+    color: var(--color-text);
+    border: 2px solid var(--color-blue);
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background-color: var(--color-blue);
+    color: var(--color-crust);
+}
+
+#new-button {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: .95em;
+}
+
+.cards {
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
@@ -56,18 +91,82 @@ main {
 
 .card button {
     min-width: 90px;
-    height: 30px;
+    min-height: 30px;
     padding: 0 10px 0 10px;
+    border-radius: 10px;
+}
+
+dialog {
+    background-color: var(--color-crust);
+    color: var(--color-text);
+    border: 2px solid var(--color-blue);
+    border-radius: 20px;
+    width: 300px;
+    height: 400px;
     box-sizing: border-box;
-    background: none;
+    padding: 20px;
+}
+
+dialog::backdrop {
+    background-color: black;
+    opacity: .7;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dialog-header h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#close-dialog {
+    border: none;
+    font-size: 1.8em;
+}
+
+#close-dialog:hover {
+    background-color: transparent;
+    color: var(--color-text);
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+dialog form button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box input {
+    background-color: transparent;
     color: var(--color-text);
     border: 2px solid var(--color-blue);
     border-radius: 10px;
-    cursor: pointer;
-    transition: .3s;
+    height: 25px;
+    padding: 0 5px;
 }
 
-.card button:hover {
-    background-color: var(--color-blue);
-    color: var(--color-crust);
+.read-status-box {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.read-status-box input[type=checkbox] {
+    cursor: pointer;
 }
