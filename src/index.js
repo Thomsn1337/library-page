@@ -1,4 +1,7 @@
-const main = document.querySelector("main")
+const cards = document.querySelector(".cards")
+const newBookButton = document.querySelector("#new-button")
+const newBookDialog = document.querySelector("#new-dialog")
+const closeDialogButton = document.querySelector("#close-dialog")
 
 const myLibrary = [];
 
@@ -15,7 +18,7 @@ function addBookToLibrary(book) {
 
 function removeBookfromLibrary(book) {
     const index = myLibrary.indexOf(book);
-    if(index > -1) {
+    if (index > -1) {
         myLibrary.splice(index, 1);
     }
 
@@ -45,7 +48,7 @@ function createCard(book) {
     card.appendChild(pages)
 
     const status = document.createElement("p")
-    if(book.readStatus) {
+    if (book.readStatus) {
         status.innerText = "Finished reading"
     }
     else {
@@ -73,11 +76,31 @@ function createCard(book) {
 
     card.appendChild(buttons)
 
-    main.appendChild(card)
+    cards.appendChild(card)
 }
 
+function openDialog() {
+    const inputTitle = document.querySelector("#title")
+    const inputAuthor = document.querySelector("#author")
+    const inputPages = document.querySelector("#pages")
+    const inputReadStatus = document.querySelector("#read")
+
+    inputTitle.value = ""
+    inputAuthor.value = ""
+    inputPages.value = ""
+    inputReadStatus.checked = false
+
+    newBookDialog.showModal()
+}
+
+newBookButton.addEventListener("click", openDialog)
+
+closeDialogButton.addEventListener("click", () => {
+    newBookDialog.close()
+})
+
 function displayBooks() {
-    main.innerHTML = ""
+    cards.innerHTML = ""
     myLibrary.forEach(book => createCard(book))
 }
 
