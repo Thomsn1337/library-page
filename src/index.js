@@ -1,21 +1,23 @@
-const cards = document.querySelector(".cards")
-const newBookButton = document.querySelector("#new-button")
-const newBookDialog = document.querySelector("#new-dialog")
-const closeDialogButton = document.querySelector("#close-dialog")
-const newBookForm = document.querySelector("#new-book-form")
+const cards = document.querySelector(".cards");
+const newBookButton = document.querySelector("#new-button");
+const newBookDialog = document.querySelector("#new-dialog");
+const closeDialogButton = document.querySelector("#close-dialog");
+const newBookForm = document.querySelector("#new-book-form");
 
-const inputTitle = document.querySelector("#title")
-const inputAuthor = document.querySelector("#author")
-const inputPages = document.querySelector("#pages")
-const inputReadStatus = document.querySelector("#read")
+const inputTitle = document.querySelector("#title");
+const inputAuthor = document.querySelector("#author");
+const inputPages = document.querySelector("#pages");
+const inputReadStatus = document.querySelector("#read");
 
 const myLibrary = [];
 
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
 }
 
 function addBookToLibrary(book) {
@@ -28,86 +30,92 @@ function removeBookfromLibrary(book) {
         myLibrary.splice(index, 1);
     }
 
-    displayBooks()
+    displayBooks();
 }
 
-const book1 = new Book("A Game of Thrones", "George R. R. Martin", 694, false)
-const book2 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true)
+const book1 = new Book("A Game of Thrones", "George R. R. Martin", 694, false);
+const book2 = new Book("The Last Wish", "Andrzej Sapkowski", 288, true);
 
-addBookToLibrary(book1)
-addBookToLibrary(book2)
+addBookToLibrary(book1);
+addBookToLibrary(book2);
 
 function createCard(book) {
     const card = document.createElement("div");
-    card.classList.add("card")
+    card.classList.add("card");
 
-    const title = document.createElement("h2")
+    const title = document.createElement("h2");
     title.innerText = book.title;
-    card.appendChild(title)
+    card.appendChild(title);
 
-    const author = document.createElement("p")
-    author.innerText = book.author
-    card.appendChild(author)
+    const author = document.createElement("p");
+    author.innerText = book.author;
+    card.appendChild(author);
 
-    const pages = document.createElement("p")
-    pages.innerText = `${book.pages} pages`
-    card.appendChild(pages)
+    const pages = document.createElement("p");
+    pages.innerText = `${book.pages} pages`;
+    card.appendChild(pages);
 
-    const status = document.createElement("p")
+    const status = document.createElement("p");
     if (book.readStatus) {
-        status.innerText = "Finished reading"
+        status.innerText = "Finished reading";
+    } else {
+        status.innerText = "Not read yet";
     }
-    else {
-        status.innerText = "Not read yet"
-    }
-    card.appendChild(status)
+    card.appendChild(status);
 
-    const buttons = document.createElement("div")
-    buttons.classList.add("buttons")
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons");
 
-    const removeButton = document.createElement("button")
-    removeButton.innerText = "Remove"
+    const removeButton = document.createElement("button");
+    removeButton.innerText = "Remove";
     removeButton.addEventListener("click", () => {
-        removeBookfromLibrary(book)
-    })
-    buttons.appendChild(removeButton)
+        removeBookfromLibrary(book);
+    });
+    buttons.appendChild(removeButton);
 
-    const statusButton = document.createElement("button")
-    statusButton.innerText = "Toggle read status"
+    const statusButton = document.createElement("button");
+    statusButton.innerText = "Toggle read status";
     statusButton.addEventListener("click", () => {
-        book.readStatus = !book.readStatus
-        displayBooks()
-    })
-    buttons.appendChild(statusButton)
+        book.readStatus = !book.readStatus;
+        displayBooks();
+    });
+    buttons.appendChild(statusButton);
 
-    card.appendChild(buttons)
+    card.appendChild(buttons);
 
-    cards.appendChild(card)
+    cards.appendChild(card);
 }
 
 function openDialog() {
-    inputTitle.value = ""
-    inputAuthor.value = ""
-    inputPages.value = ""
-    inputReadStatus.checked = false
+    inputTitle.value = "";
+    inputAuthor.value = "";
+    inputPages.value = "";
+    inputReadStatus.checked = false;
 
-    newBookDialog.showModal()
+    newBookDialog.showModal();
 }
 
-newBookButton.addEventListener("click", openDialog)
+newBookButton.addEventListener("click", openDialog);
 
 closeDialogButton.addEventListener("click", () => {
-    newBookDialog.close()
-})
+    newBookDialog.close();
+});
 
 function displayBooks() {
-    cards.innerHTML = ""
-    myLibrary.forEach(book => createCard(book))
+    cards.innerHTML = "";
+    myLibrary.forEach((book) => createCard(book));
 }
 
 newBookForm.addEventListener("submit", () => {
-    addBookToLibrary(new Book(inputTitle.value, inputAuthor.value, inputPages.value, inputReadStatus.checked))
-    displayBooks()
-})
+    addBookToLibrary(
+        new Book(
+            inputTitle.value,
+            inputAuthor.value,
+            inputPages.value,
+            inputReadStatus.checked,
+        ),
+    );
+    displayBooks();
+});
 
-window.addEventListener("load", displayBooks)
+window.addEventListener("load", displayBooks);
